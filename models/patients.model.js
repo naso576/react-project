@@ -10,8 +10,8 @@ module.exports = mongoose => {
         contact:Number,
         address1 : String,
         address2: String,
-        complaints: String,
-        duration:String,
+        // complaints: String,
+        // duration:String,
         consultDate : String
         
       },

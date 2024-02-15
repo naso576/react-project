@@ -33,7 +33,7 @@ const duration =req.body.duration.toString()+" "+req.body.durationTime.toString(
 
   // Create a Patient
   const patient = new Patient({
-    profileNo :currentdate,
+    profileNo :req.body.profileNo,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     gender: req.body.gender,
@@ -42,8 +42,8 @@ const duration =req.body.duration.toString()+" "+req.body.durationTime.toString(
     contact:req.body.contact,
     address1: req.body.address1,
     address2: req.body.address2,
-    complaints: req.body.complaints.toString(),
-    duration : duration.toString(),
+    // complaints: req.body.complaints.toString(),
+    // duration : duration.toString(),
     consultDate : curdate
   });
 
@@ -51,13 +51,15 @@ const duration =req.body.duration.toString()+" "+req.body.durationTime.toString(
   patient
     .save(patient)
     .then(data => {
-     // res.send(data);
+
     // console.log("values"+complaintsString);
       res.setHeader("Access-Control-Allow-Origin", "*")
 res.setHeader("Access-Control-Allow-Credentials", "true");
 res.setHeader("Access-Control-Max-Age", "1800");
 res.setHeader("Access-Control-Allow-Headers", "content-type");
 res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
+res.send(data.profileNo);
+console.log(data.profileNo);
     })
     .catch(err => {
       res.status(500).send({
@@ -85,14 +87,19 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single Tutorial with an id
-exports.findOne = (req, res) => {
+exports.findPatient = (req, res,next) => {
+
+  
   const id = req.params.id;
 
-  Patient.findById(id)
+  console.log('calling'+id)
+
+  Patient.find({profileNo:id})
     .then(data => {
       if (!data)
         res.status(404).send({ message: "Not found Tutorial with id " + id });
       else res.send(data);
+      // console.log(data);
     })
     .catch(err => {
       res

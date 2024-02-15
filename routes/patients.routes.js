@@ -1,10 +1,12 @@
 
     const patients = require("../controllers/patients.controller.js");
+    
   
     var router = require("express").Router();
   
     // Create a new Tutorial
     router.post("/register", patients.create);
+
   
     // Retrieve all Tutorials
     router.get("/findAll", patients.findAll);
@@ -13,7 +15,7 @@
     router.get("/published", patients.findAllPublished);
   
     // Retrieve a single Tutorial with id
-    router.get("/:id", patients.findOne);
+    router.get("/:id", patients.findPatient);
   
     // Update a Tutorial with id
     router.put("/:id", patients.update);
@@ -23,5 +25,6 @@
   
     // Create a new Tutorial
     router.delete("/", patients.deleteAll);
-  
+
+
     module.exports = router;    
