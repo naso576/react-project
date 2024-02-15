@@ -38,9 +38,12 @@ render() {
 console.log("search page");
 return(
     <div>                 
-        {this.state.result.map(item => (
+        {
+           <ManageProfile/>
+        
+        /* {this.state.result.map(item => (
              <ManageProfile rowData={item} handleClick={this.state.result}/>
-        ))}
+        ))} */}
  </div>               
   );
 
@@ -174,6 +177,9 @@ Search by
         padding: 20
       }}
     >
+        <div>
+        <p style={{}}>Search Page</p>
+        </div>
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <div style={{ padding: 3 }}>
         {dataFiltered.map((d) => (

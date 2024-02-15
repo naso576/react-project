@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, IconButton,FormControlLabel } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
@@ -6,11 +6,44 @@ import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
 import axios from "axios";
 import React, {useState, useEffect} from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import {useHistory, useNavigate} from 'react-router-dom';
 
+
+
+ 
+ 
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [data, setData] = useState([]);
+
+
+  const navigate = useNavigate();
+const handleIconClick = ( ) => {
+
+  /*   history.push('../../scenes/sign-in'); */
+  navigate('/manageprofiles');
+ 
+ }
+
+
+  const MatEdit = ({ index }) => {
+
+    const handleEditClick = () => {
+        // some action
+    }
+  
+  
+    return <FormControlLabel
+               control={
+                   <IconButton color="secondary" aria-label="add an alarm" onClick={handleIconClick} >
+                       <EditIcon style={{color: colors.blueAccent[500]}}/>
+                   </IconButton>
+               }
+           />
+  };
+  
 
   const fetchInfo = () => {
     return axios.get('http://localhost:3000/find').then((res) => setData(res.data));
@@ -67,12 +100,28 @@ const Contacts = () => {
       headerName: "Complaints",
       flex: 1,
     },
+    {
+      field: "actions",
+      headerName: "Edit",
+      sortable: false,
+      width: 140,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+          return (
+              <div className="d-flex justify-content-between align-items-center" style={{ cursor: "pointer" }}>
+                  <MatEdit index={params.row.id} />
+               </div>
+          );
+       }
+    }
+
+   
   ];
 
   return (
     <Box m="20px">
       <Header
-        title="PATIENTS"
+        title="PATIENTS LIST"
         subtitle="List of Patients for Future Reference"
       />
       <Box
@@ -111,7 +160,10 @@ const Contacts = () => {
           rows={data}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
+        
         />
+       
+
       </Box>
     </Box>
   );

@@ -12,6 +12,7 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import MedicationIcon from '@mui/icons-material/Medication';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -93,7 +94,7 @@ const Sidebar1 = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
+                  src={`../../assets/log_blue.jpg`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -129,6 +130,13 @@ const Sidebar1 = () => {
             >
               Data
             </Typography>
+            <Item
+              title="Templates"
+              to="/templates"
+              icon={<MedicationIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="Manage Patients"
               to="/manageprofiles"

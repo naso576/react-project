@@ -42,11 +42,11 @@ return (
 
 <Box display="flex" borderRadius="3px" backgroundColor={colors.primary[400]}
 >
-<InputBase sx={{ml:2,flex:1}} placeholder="Search"></InputBase>
+{/* <InputBase sx={{ml:2,flex:1}} placeholder="Search"></InputBase>
 <IconButton type="button" sx ={{ p : 1}}>
 <SearchIcon/>
 
-</IconButton>
+</IconButton> */}
 </Box>
 
 <Box display="flex"> 

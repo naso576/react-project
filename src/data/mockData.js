@@ -1,5 +1,153 @@
 import { tokens } from "../theme";
 
+
+export const mockInvestigationsData =[
+
+  {
+    id :1,
+    investigationCode : "Complete blood picture",
+    selected : false
+
+  },
+  {
+    id :2,
+    investigationCode : "Renal function tests",
+    selected : false
+
+  },
+  {
+    id :3,
+    investigationCode : "Serum electrolytes",
+    selected : false
+
+  },
+  {
+    id :4,
+    investigationCode : "Liver function tests",
+    selected : false
+  },
+  {
+    id :5,
+    investigationCode : "Total serum protein",
+    selected : false
+  },
+  {
+    id :6,
+    investigationCode : "Serum Albumin",
+    selected : false
+  },
+  {
+    id :7,
+    investigationCode : "Serum calcium total",
+    selected : false
+  },
+  {
+    id :8,
+    investigationCode : "Serum phosphorous",
+    selected : false
+  },
+  {
+    id :9,
+    investigationCode : "Serum uric acid",
+    selected : false
+  },
+  {
+    id :10,
+    investigationCode : "HIV 1&2 ELISA",
+    selected : false
+  },
+  {
+    id :11,
+    investigationCode : "HbSAg antibody ELISA",
+    selected : false
+  },
+  {
+    id :12,
+    investigationCode : "HCV antibody ELISA",
+    selected : false
+  },
+  {
+    id :13,
+    investigationCode : "Complete urine analysis",
+    selected : false
+  },
+  {
+    id :14,
+    investigationCode : "Urine albumin creatinine ratio",
+    selected : false
+  },
+  {
+    id :15,
+    investigationCode : "24 hours urine protein/volume/creatinine",
+    selected : false
+  },
+  {
+    id :16,
+    investigationCode : "USG abdomen",
+    selected : false
+  },
+  {
+    id :17,
+    investigationCode : "Chest radiograph PA view",
+    selected : false
+  },
+  {
+    id :18,
+    investigationCode : "Colour doppler of renal arteries",
+    selected : false
+  },
+  {
+    id :19,
+    investigationCode : "CT abdomen(plain/contrast)",
+    selected : false
+  },
+  {
+    id :20,
+    investigationCode : "Arterial blood gas analysis",
+    selected : false
+  },
+  {
+    id :21,
+    investigationCode : "Ferritin",
+    selected : false
+  },
+  {
+    id :22,
+    investigationCode : "2D ECHO",
+    selected : false
+  },
+  {
+    id :23,
+    investigationCode : "Urine culture & sensitivity",
+    selected : false
+  },
+  {
+    id :24,
+    investigationCode : "Blood culture & sensitivity",
+    selected : false
+  },
+  {
+    id :25,
+    investigationCode : "Renal biopsy",
+    selected : false
+  },
+  {
+    id :26,
+    investigationCode : "Other",
+    selected : false
+  },
+];
+
+
+export const tabletsList = [
+    {
+      tabletName : 'NEPHRO FCM',
+      composition : '',
+
+    }
+
+];
+
 export const mockDataTeam = [
   {
     id: 1,
