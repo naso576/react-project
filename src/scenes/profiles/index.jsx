@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Autocomplete } from "@mui/material";
+import { Box, Button, TextField, Autocomplete, Select,MenuItem } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -10,8 +10,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import * as React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
+import AddDetails from "../addComorbidities";
+import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import NativeSelect from '@mui/material/NativeSelect';
 
 
 const  Options ={ 
@@ -29,12 +33,37 @@ const durationOptions = {
 
 const PatientProfile = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [data,setData] = useState("");
+  const today = new Date();
+
+  const month = today.getMonth()+1;
+
+  const year = today.getFullYear();
+  const day = today.getDate();
+  const randomNumberInRange = (min, max) => { 
+    return Math.floor(Math.random()  
+            * (max - min + 1)) + min; 
+}; 
+
+const num =randomNumberInRange(1, 500);
+const currentdate = year.toString()+month.toString()+day.toString()+num.toString();
+
 
   const handleFormSubmit =  (values) => {
 
-    axios.post('http://localhost:3000/register',values).then(res => console.log('success')).catch(err => console.log('error'));
+    axios.post('http://localhost:3000/register',values).then(res => 
+    {
+     // console.log('success'+res.data);
+      setData(res.data );
+    }
+    ).catch(err => console.log('error'));
 
-   console.log(values);
+ //  console.log(values);
+
+ 
+  
+   console.log('success'+data.key);
+   handleSubmit(data);
 
   };
   
@@ -51,9 +80,8 @@ const PatientProfile = () => {
     gender : Options.Option1.toString(),
     complaints: "",
     durationTime :durationOptions.Option1.toString(),
+    profileNo : currentdate.toString(),
   });
-
-  
   
   const handleChange =(event) =>{
   
@@ -78,11 +106,27 @@ const PatientProfile = () => {
 
 
   };
+  const navigate = useNavigate();
+  console.log('currentDate is'+currentdate)
+ // const history = useHistory();
+const handleSubmit=(profileNo) =>{
+  console.log('profileNo is'+profileNo)
+  // navigate('/profiles/addComorbidities');
+  //  navigate( '/profiles/addComorbidities',{state : {profileNo :currentdate}}  )
+
+navigate('historyPage2', {state : {profileNo : currentdate}});
+
+ // history.push({ pathname: "/profiles/addComorbidities", state: currentDate });
+
+}
+
+
 
 
   return (
+    <div>
     <Box m="20px">
-      <Header title="CREATE PROFILE" subtitle="Create a New Patient Profile" />
+      <Header title="CREATE PATIENT PROFILE" subtitle="Create a New Patient Profile" />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -97,6 +141,7 @@ const PatientProfile = () => {
           handleBlur,
           handleChange,
           handleSubmit,
+          
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
@@ -148,7 +193,7 @@ const PatientProfile = () => {
                     <FormControlLabel value={Options.Option3.toString()} control={<Radio />} label="Other" />
                   
                   </RadioGroup>
-                </FormControl>
+                </FormControl >
                 <TextField
                  fullWidth
                  variant="filled"
@@ -217,7 +262,7 @@ const PatientProfile = () => {
                 helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 2" }}
               />
-               <Autocomplete
+               {/* <Autocomplete
                     freeSolo
                     multiple
                     limitTags={10}
@@ -226,11 +271,7 @@ const PatientProfile = () => {
                     getOptionLabel={(option) => option.title}
                     name="complaints"
                        onChange={(event,value)=> setFieldValue("complaints",value.map((option) => option.title))}
-                    // onChange={(event, newValue) => {
-                    //   setFieldValue(newValue.map(option => option.value || option));
-                    // }}
-                    // isOptionEqualToValue={(option, value) => option.title === value}
-                   // defaultValue={[top10Complaints[10], top10Complaints[2], top10Complaints[3]]}
+                   
                     renderInput={(params) => (
                       <TextField {...params} 
                       label="Complaints" 
@@ -245,8 +286,7 @@ const PatientProfile = () => {
                     
                 />
              
-              <FormControl size="large" sx={{ gap: 1, margin: 1}}>
-                  <FormLabel id="duration-group" />
+            
                   <TextField
                 fullWidth
                 variant="filled"
@@ -258,8 +298,11 @@ const PatientProfile = () => {
                 name="duration"
                 error={!!touched.duration && !!errors.duration}
                 helperText={touched.duration && errors.duration}
-                sx={{ gridColumn: "span 2" }}
+                sx={{ gridColumn: "span 1", width :'200px' }}
               />
+
+                  <FormControl >
+                  <FormLabel id="duration-group" />
                   <RadioGroup
                     row
                     aria-labelledby="duration-group-label"
@@ -274,18 +317,25 @@ const PatientProfile = () => {
                     <FormControlLabel value={durationOptions.Option3.toString()} control={<Radio />} label="Month/s" />
                   </RadioGroup>
                 </FormControl>
-                
+                 */}
 
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
-              <Button type="submit" color="secondary" variant="contained">
+              <Button type="submit" color="secondary" variant="contained" >
                 Create New User
               </Button>
             </Box>
           </form>
         )}
       </Formik>
+
     </Box>
+  
+   
+   </div>
+   
+
+
   );
 };
 
@@ -303,7 +353,7 @@ const checkoutSchema = yup.object().shape({
     .required("required"),
   address1: yup.string().required("required"),
   address2: yup.string().required("required"),
-  duration: yup.string().required("required"),
+  // duration: yup.string().required("required"),
 });
 
 
